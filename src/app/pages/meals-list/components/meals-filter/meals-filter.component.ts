@@ -1,4 +1,4 @@
-import { Component, inject, model, OnChanges, output, signal, SimpleChanges } from '@angular/core';
+import { Component, inject, input, model, OnChanges, output, signal, SimpleChanges } from '@angular/core';
 import { DialogModule } from 'primeng/dialog';
 import { PaginatorModule, PaginatorState } from 'primeng/paginator';
 import { ApiService } from '../../../../shared/api/api.service';
@@ -20,7 +20,9 @@ export class MealsFilterComponent implements OnChanges {
   public currentPage = signal<number>(1);
   public currentData = signal<IngredientDto[]>([]);
   public totalRecords = signal<number>(0);
-  public selectedIngredient = model<string>('');
+  public selectedIngredient = input<string>('');
+  public selected = signal<string>(this.selectedIngredient());
+
   public filterAction = output<string>();
 
   private readonly apiService = inject(ApiService);
@@ -32,7 +34,7 @@ export class MealsFilterComponent implements OnChanges {
   }
 
   public save(): void {
-    this.filterAction.emit(this.selectedIngredient());
+    this.filterAction.emit(this.selected());
     this.visible.set(false);
   }
 

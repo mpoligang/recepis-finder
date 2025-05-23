@@ -74,7 +74,7 @@
 <p-confirmdialog />
 
 <app-meals-filter
-  [(selectedIngredient)]="ingredientFilter"
+  [selectedIngredient]="ingredientFilter()"
   [(visible)]="showFilter"
   (filterAction)="handleFilter($event)"
 />

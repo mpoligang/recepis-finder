@@ -26,21 +26,15 @@
     @for (item of currentData(); track $index) {
     <div class="col-fixed">
       <p-button
-        [variant]="
-          selectedIngredient() === item.strIngredient ? undefined : 'outlined'
-        "
+        [variant]="selected() === item.strIngredient ? undefined : 'outlined'"
         [label]="item.strIngredient"
-        (onClick)="selectedIngredient.set(item.strIngredient)"
+        (onClick)="selected.set(item.strIngredient)"
       ></p-button>
     </div>
     }
   </div>
   <ng-template #footer>
     <p-button label="Cancel" [outlined]="true" (click)="visible.set(false)" />
-    <p-button
-      label="Save"
-      (click)="save()"
-      [disabled]="!selectedIngredient()"
-    />
+    <p-button label="Save" (click)="save()" [disabled]="!selected()" />
   </ng-template>
 </p-dialog>

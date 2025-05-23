@@ -74,6 +74,8 @@ export class MealsListComponent implements OnInit {
   public handleFilter(ingredient: string): void {
     this.resetValues();
     this.ingredientFilter.set(ingredient);
+    console.log(this.ingredientFilter());
+
     this.isLoading.set(true);
     this.apiService
       .searchMealsByIngredient(ingredient)
