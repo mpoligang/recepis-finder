@@ -10,4 +10,5 @@
 .meal-detail-scroller {
     height: calc(100dvh - 5rem);
     overflow-y: auto;
+    overflow-x: hidden;
 }

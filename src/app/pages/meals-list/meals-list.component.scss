@@ -1,4 +1,5 @@
 .meals-list-container-scroller {
     overflow-y: auto;
+    overflow-x: hidden;
     height: calc(100dvh - 5rem);
 }
