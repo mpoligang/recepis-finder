@@ -2,10 +2,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Component, inject, OnDestroy, signal } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { Location } from '@angular/common';
+import { LandingBackgroundComponent } from '../../shared/components/landing-background/landing-background.component';
 
 @Component({
   selector: 'app-not-found',
-  imports: [ButtonModule],
+  imports: [ButtonModule, LandingBackgroundComponent],
   templateUrl: './not-found.component.html',
   styleUrl: './not-found.component.scss'
 })

@@ -17,7 +17,7 @@ export const routes: Routes = [
     },
     {
         path: `${AppRouting.DETAIL}/:id`,
-        loadComponent: () => MealDetailComponent,
+        loadComponent: () => MealDetailComponent
     },
     {
         path: `${AppRouting.NOT_FOUND}`,

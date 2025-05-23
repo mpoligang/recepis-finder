@@ -7,8 +7,12 @@
       (onClick)="backNavigation.emit()"
     ></p-button>
   </div>
-  <div class="col-fixed">
+  @if(!isLoading()){
+  <div class="col-fixed meal-title-container">
     <h3 class="m-0 meal-title">{{ title() }}</h3>
   </div>
+  } @else {
+  <p-skeleton width="200px" height="35px"></p-skeleton>
+  }
   <ng-content />
 </div>

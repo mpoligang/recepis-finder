@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Meal } from '../../models/Meal.interface';
+import { Meal, MealBasicData } from '../../models/Meal.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -7,7 +7,7 @@ import { Meal } from '../../models/Meal.interface';
 export class FavoriteService {
 
 
-  public getFavorites(): Array<Meal> {
+  public getFavorites(): Array<MealBasicData> {
     let result = [];
     const data = localStorage.getItem('favorites');
     if (!data) {
@@ -28,13 +28,19 @@ export class FavoriteService {
     return result;
   }
 
-  public setAsFavorite(data: Meal): void {
+  public setAsFavorite(data: Meal | MealBasicData): void {
+    const dataToSave: MealBasicData = {
+      title: data.title,
+      id: data.id,
+      thumbs: data.thumbs,
+      favorite: true
+    }
     const favorites = this.getFavorites();
-    favorites.push(data);
+    favorites.push(dataToSave);
     localStorage.setItem('favorites', JSON.stringify(favorites));
   }
 
-  public removeFromFavorites(data: Meal): void {
+  public removeFromFavorites(data: Meal | MealBasicData): void {
     const favorites = this.getFavorites();
     const favoriteWithoutItemToRemove = favorites.filter(item => item.id !== data.id)
     localStorage.setItem('favorites', JSON.stringify(favoriteWithoutItemToRemove));

@@ -1,0 +1,46 @@
+<p-dialog
+  header="Filter Search"
+  [(visible)]="visible"
+  [modal]="true"
+  [breakpoints]="{ '1199px': '75vw', '575px': '90vw' }"
+  [style]="{ width: '40vw', height: '100dvh' }"
+  [draggable]="false"
+  [resizable]="false"
+>
+  <div class="flex">
+    <div class="col">
+      <h3 class="m-0">Ingredients</h3>
+    </div>
+  </div>
+  <div class="flex">
+    <div class="col py-0">
+      <p-paginator
+        (onPageChange)="onPageChange($event)"
+        [first]="1"
+        [rows]="30"
+        [totalRecords]="totalRecords()"
+      />
+    </div>
+  </div>
+  <div class="flex flex-wrap">
+    @for (item of currentData(); track $index) {
+    <div class="col-fixed">
+      <p-button
+        [variant]="
+          selectedIngredient() === item.strIngredient ? undefined : 'outlined'
+        "
+        [label]="item.strIngredient"
+        (onClick)="selectedIngredient.set(item.strIngredient)"
+      ></p-button>
+    </div>
+    }
+  </div>
+  <ng-template #footer>
+    <p-button label="Cancel" [outlined]="true" (click)="visible.set(false)" />
+    <p-button
+      label="Save"
+      (click)="save()"
+      [disabled]="!selectedIngredient()"
+    />
+  </ng-template>
+</p-dialog>

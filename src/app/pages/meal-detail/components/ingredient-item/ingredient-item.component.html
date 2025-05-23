@@ -9,11 +9,13 @@
     </div>
   </div>
   <div class="flex flex-wrap align-items-center w-full">
-    <div class="col py-0">
-      <h4 class="m-0">{{ item().ingredient }}</h4>
+    <div class="col py-0 pr-2">
+      <h4 class="ingredient-title m-0">
+        {{ item().ingredient }}
+      </h4>
     </div>
-    <div class="py-0 pr-4 sm:col-fixed col-12">
-      <span>
+    <div class="col-12">
+      <span class="ingredient-measure">
         {{ item().measure }}
       </span>
     </div>

@@ -10,10 +10,10 @@ import { TagModule } from 'primeng/tag';
 })
 export class MealItemComponent implements OnChanges {
 
-  public title = input<string>('');
+  public title = input<string | null | undefined>();
   public height = input<string>('');
   public favorite = input<boolean>(false);
-  public preparationTime = input<string | undefined>(undefined);
+  public preparationTime = input<string | undefined | null>(null);
   public image = input<string>('200px');
 
   public setFavorite = output<void>();

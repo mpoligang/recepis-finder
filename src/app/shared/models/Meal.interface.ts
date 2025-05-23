@@ -2,18 +2,22 @@ import { Preparation } from './Preparation.interface';
 import { Ingredient } from './Ingredients.interface';
 import { Thumbs } from './Thumbs.interface';
 
-export interface Meal {
+
+export interface MealBasicData {
   id: string;
-  category: string;
   title: string;
+  thumbs: Thumbs;
+  favorite: boolean;
+}
+export interface Meal extends MealBasicData {
+  category: string;
   source: string | null;
+  youtube: string | null;
   nationality: string;
-  tags?: string[];
+  tags: string | null;
   preparation: Preparation[];
   estimatedTime?: string;
-  thumbs: Thumbs;
   ingredients: Ingredient[];
-  favorite: boolean;
 }
 
 export class MealInstance {
@@ -21,8 +25,9 @@ export class MealInstance {
   public category: string;
   public title: string;
   public source: string | null;
+  public youtube: string | null;
   public nationality: string;
-  public tags?: string[];
+  public tags: string | null;
   public preparation: Preparation[];
   public estimatedTime?: string;
   public thumbs: Thumbs;
@@ -34,8 +39,9 @@ export class MealInstance {
     this.category = '';
     this.title = '';
     this.source = '';
+    this.youtube = '';
     this.nationality = '';
-    this.tags = [];
+    this.tags = '';
     this.preparation = [];
     this.estimatedTime = '';
     this.thumbs = {

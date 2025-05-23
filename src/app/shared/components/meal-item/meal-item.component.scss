@@ -1,12 +1,14 @@
 .meal-item {
     background-position: center;
     background-size: cover;
+    background-repeat: no-repeat;
     width: 100%;
     cursor: pointer;
     border-radius: 20px;
     position: relative;
     display: flex;
     flex-direction: column;
+    transition: all 0.4s ease-in-out;
     &.is-loading-or-error {
         display: flex;
         flex-direction: column;

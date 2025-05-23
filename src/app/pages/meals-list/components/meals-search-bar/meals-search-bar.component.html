@@ -1,8 +1,4 @@
 <div class="flex flex-column">
-  <app-title-with-back-navigation
-    title="Search Receips"
-    (backNavigation)="handleBackToLanding()"
-  />
   <div class="flex align-items-center">
     <div class="col pl-0">
       <p-iconfield>
@@ -14,12 +10,12 @@
           class="w-full"
           id="search"
           name="search"
-          [(ngModel)]="term"
+          [(ngModel)]="searchValue"
           (input)="handleSearch()"
         />
         @if(isLoading()){
         <p-inputicon styleClass="pi pi-spinner pi-spin" />
-        } @if(term().length > 0 && !isLoading()){
+        } @if(searchValue().length > 0 && !isLoading()){
         <p-button
           (onClick)="handleClear()"
           size="small"
@@ -30,9 +26,7 @@
         }
       </p-iconfield>
     </div>
-    <div class="col-fixed px-0">
-      <p-button icon="pi pi-filter" variant="text" [raised]="true"></p-button>
-    </div>
+    <ng-content></ng-content>
   </div>
   <div class="flex align-items-center mt-1">
     <div class="col px-0">

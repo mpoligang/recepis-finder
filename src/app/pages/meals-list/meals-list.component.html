@@ -1,19 +1,49 @@
-<div class="page-container p-3">
-  <app-meals-search-bar
-    (searchAction)="handleSearch($event)"
-    [isLoading]="isLoading()"
-    [results]="mealList().result"
+<div class="page-container px-3 pt-3 pb-1">
+  <app-title-with-back-navigation
+    title="Search Receips"
+    (backNavigation)="handleBackToLanding()"
   />
-  <div class="meals-list-container-scroller mt-2">
+</div>
+<div class="meals-list-container-scroller">
+  <div class="page-container px-3">
+    <app-meals-search-bar
+      [(searchValue)]="searchValue"
+      (searchAction)="handleSearch($event)"
+      [isLoading]="isLoading()"
+      [results]="mealList().result"
+    >
+      <div class="col-fixed px-0">
+        <p-button
+          icon="pi pi-filter"
+          variant="text"
+          [raised]="true"
+          (onClick)="showFilter.set(true)"
+        ></p-button>
+      </div>
+    </app-meals-search-bar>
+    @if(ingredientFilter().length > 1){
+    <div class="flex">
+      <div class="col-fixed pl-0">
+        <p-chip
+          [label]="ingredientFilter()"
+          [removable]="true"
+          (onRemove)="handleSearch('')"
+        ></p-chip>
+      </div>
+    </div>
+    }
+
     <div class="flex flex-wrap">
       @for (item of mealList().data; track $index) {
-      <div class="md:col-4 sm:col-6 col-12 pl-0">
+      <div
+        class="md:col-4 sm:col-6 col-12 px-0"
+        [class]="getMealItemPadding($index)"
+      >
         <app-meal-item
           height="200px"
           [title]="item.title"
           [favorite]="item.favorite"
           [image]="item.thumbs.medium"
-          [preparationTime]="item.estimatedTime"
           (clickItem)="goToDetail(item.id)"
           (setFavorite)="confirmHandleFavorite(item)"
         />
@@ -21,11 +51,16 @@
       }
     </div>
     @if(!mealList().result && !isLoading()){
-    <app-result-not-found />
+    <div class="mt-3">
+      <app-result-not-found />
+    </div>
     } @if(isLoading()){
     <div class="flex flex-wrap">
       @for (item of skeletonData(); track $index) {
-      <div class="md:col-4 sm:col-6 col-12">
+      <div
+        class="md:col-4 sm:col-6 col-12 px-0"
+        [class]="getMealItemPadding($index)"
+      >
         <div class="self-center" style="flex: 1">
           <p-skeleton height="200px" width="100%"></p-skeleton>
         </div>
@@ -37,3 +72,9 @@
 </div>
 
 <p-confirmdialog />
+
+<app-meals-filter
+  [(selectedIngredient)]="ingredientFilter"
+  [(visible)]="showFilter"
+  (filterAction)="handleFilter($event)"
+/>

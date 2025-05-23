@@ -1,7 +1,4 @@
 
-export interface MealResponse {
-    meals: Array<MealDto> | null
-}
 
 
 export interface MealDto {

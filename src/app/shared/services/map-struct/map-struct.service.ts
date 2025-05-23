@@ -1,12 +1,13 @@
 import { inject, Injectable } from '@angular/core';
 import { FavoriteService } from './../favorite/favorite.service';
-import { MealList, MealListInstace } from './../../models/MealList.interface';
+import { MealBasicList, MealListInstace } from './../../models/MealList.interface';
 import { MealDto } from '../../api/dtos/MealDto.interface';
 import { Ingredient } from '../../models/Ingredients.interface';
 import { Thumbs } from '../../models/Thumbs.interface';
 import { Meal } from '../../models/Meal.interface';
 import { environment } from '../../../../environments/environment';
 import { Preparation } from '../../models/Preparation.interface';
+import { GenericResponseDto } from '../../api/dtos/GenericResponseDto.interface';
 
 @Injectable({
   providedIn: 'root'
@@ -15,19 +16,25 @@ export class MapStructService {
 
   private readonly favoriteService = inject(FavoriteService);
 
-  constructor() {
-    console.log(this.estimateStringTimeFromInstructions('Cook for 1.5 hours and 30 seconds.'))
+  public mapMealsResponseResultbyFilter(data: GenericResponseDto<MealDto>): MealBasicList {
+    if (!data || !Array.isArray(data.meals)) { return new MealListInstace(); }
+    return {
+      data: data.meals.map(item => ({
+        id: item.idMeal,
+        title: item.strMeal,
+        thumbs: this.extractThumbSizes(item.strMealThumb),
+        favorite: this.favoriteService.checkIfIsFavorite(item.idMeal)
+      })),
+      result: data.meals.length
+    }
   }
 
-
-  public mapMealsResponseResults(data: MealDto[] | null): MealList {
-    if (!data || !Array.isArray(data)) { return new MealListInstace(); }
+  public mapMealsCompleteResponse(data: GenericResponseDto<MealDto>): Meal | null {
+    if (!data || !Array.isArray(data.meals)) { return null; }
+    const meal = data.meals[0];
     return {
-      data: data.map(item => ({
-        ...this.mapMealsResponse(item)
-      })),
-      result: data.length
-    }
+      ...this.mapMealsResponse(meal)
+    };
   }
 
   public mapMealsResponse(data: MealDto): Meal {
@@ -36,9 +43,10 @@ export class MapStructService {
       category: data.strCategory,
       title: data.strMeal,
       source: data.strSource,
+      youtube: data.strYoutube,
       thumbs: this.extractThumbSizes(data.strMealThumb),
       nationality: data.strArea,
-      tags: data.strTags?.split(','),
+      tags: data.strTags,
       preparation: this.extractPreparationsStep(data.strInstructions),
       ingredients: this.extractIngredientsAndMeasures(data),
       estimatedTime: this.estimateStringTimeFromInstructions(data.strInstructions),
@@ -125,7 +133,7 @@ export class MapStructService {
   public extractPreparationsStep(instructions: string): Preparation[] {
     const steps = instructions.split(/\r?\n/).filter(line => line.trim() !== '');
     let stepsArray: Preparation[] = [];
-    stepsArray = steps.filter(item => !item.startsWith('STEP')).map((instructions, index) => {
+    stepsArray = steps.filter(item => !item.startsWith('STEP') && item.length > 1).map((instructions, index) => {
       return {
 
         step: index + 1,

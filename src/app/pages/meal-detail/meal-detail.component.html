@@ -1,25 +1,41 @@
-<div class="page-container p-3">
+<div class="page-container px-3 pt-3 pb-1">
   <app-title-with-back-navigation
     [title]="data().title"
     (backNavigation)="backToList()"
+    [isLoading]="isLoading()"
   >
+    <div class="col flex justify-content-end">
+      <p-button
+        [raised]="true"
+        icon="pi pi-ellipsis-v"
+        variant="text"
+        (onClick)="menu.toggle($event)"
+      ></p-button>
+    </div>
+    <p-menu [appendTo]="'body'" #menu [model]="menuItems()" [popup]="true" />
   </app-title-with-back-navigation>
-  <div class="meal-detail-scroller">
+</div>
+<div class="meal-detail-scroller">
+  <div class="page-container px-3">
+    @if(!isLoading()){
     <div class="flex">
-      <div class="col">
+      <div class="col px-0">
         <app-meal-item
           (setFavorite)="confirmHandleFavorite()"
           [image]="data().thumbs.large"
           [favorite]="data().favorite"
+          [title]="data().tags"
           [preparationTime]="data().estimatedTime"
           height="300px"
         />
       </div>
     </div>
     <div class="flex">
-      <div class="col justify-content-center flex">
+      <div class="col justify-content-center flex flex-wrap">
         <div class="col-fixed">
           <p-button
+            [size]="tabButtonSize()"
+            [badge]="data().ingredients.length.toString()"
             (onClick)="selectedTab.set(tabs.INGREDIENTS)"
             [variant]="selectedTab() !== tabs.INGREDIENTS ? 'text' : undefined"
             label="Ingredients"
@@ -27,6 +43,8 @@
         </div>
         <div class="col-fixed">
           <p-button
+            [size]="tabButtonSize()"
+            [badge]="data().preparation.length.toString()"
             (onClick)="selectedTab.set(tabs.PREPARATION)"
             label="Preparation"
             [variant]="selectedTab() !== tabs.PREPARATION ? 'text' : undefined"
@@ -48,6 +66,9 @@
         }
       </div>
     </div>
+    } @else {
+    <app-loading-meal-detail />
+    }
   </div>
 </div>
 
