@@ -133,9 +133,8 @@ export class MapStructService {
   public extractPreparationsStep(instructions: string): Preparation[] {
     const steps = instructions.split(/\r?\n/).filter(line => line.trim() !== '');
     let stepsArray: Preparation[] = [];
-    stepsArray = steps.filter(item => item.length > 7).map((instructions, index) => {
+    stepsArray = steps.filter(item => item.length > 8).map((instructions, index) => {
       return {
-
         step: index + 1,
         instructions
       }
