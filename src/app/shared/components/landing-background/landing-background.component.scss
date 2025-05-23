@@ -2,12 +2,11 @@
     background: url("/food_background.jpg");
     background-size: cover;
     background-position: center;
-    height: 100%;
+    height: 100vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    overflow-y: auto;
     color: var(--p-surface-0);
     &::before {
         content: "";
