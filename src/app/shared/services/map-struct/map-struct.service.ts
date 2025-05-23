@@ -91,7 +91,7 @@ export class MapStructService {
 
   private estimateStringTimeFromInstructions(instructions: string): string | undefined {
 
-    const timePattern = /\b(\d+(?:\.\d+)?)\s*(days?|day|hours?|hour|minutes?|minute|mins?|min|seconds?|secs?|sec)\b/gi;
+    const timePattern = /\b(\d+(?:\.\d+)?)\s*(days?|day|hours?|hour|h|hrs|minutes?|m|minute|mins?|min|seconds?|secs?|sec)\b/gi;
     const matches = [...instructions.matchAll(timePattern)];
 
     let totalSeconds = 0;
