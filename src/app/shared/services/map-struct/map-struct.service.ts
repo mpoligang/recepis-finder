@@ -46,7 +46,7 @@ export class MapStructService {
       youtube: data.strYoutube,
       thumbs: this.extractThumbSizes(data.strMealThumb),
       nationality: data.strArea,
-      tags: data.strTags,
+      tags: data.strTags ? data.strTags.split(',').join(', ') : null,
       preparation: this.extractPreparationsStep(data.strInstructions),
       ingredients: this.extractIngredientsAndMeasures(data),
       estimatedTime: this.estimateStringTimeFromInstructions(data.strInstructions),
