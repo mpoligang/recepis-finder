@@ -1,4 +1,4 @@
-import { Component, input, model, OnDestroy, output, signal } from '@angular/core';
+import { Component, input, model, OnChanges, OnDestroy, output, signal, SimpleChanges } from '@angular/core';
 import { IconFieldModule } from 'primeng/iconfield';
 import { InputIconModule } from 'primeng/inputicon';
 import { InputTextModule } from 'primeng/inputtext';
@@ -16,12 +16,14 @@ import { FormsModule } from '@angular/forms';
   templateUrl: './meals-search-bar.component.html',
   styleUrl: './meals-search-bar.component.scss',
 })
-export class MealsSearchBarComponent implements OnDestroy {
+export class MealsSearchBarComponent implements OnChanges, OnDestroy {
 
   public isLoading = input<boolean>(false);
   public results = input<number | null>(null);
+  public searchValue = input<string>('');
   public searchAction = output<string>();
-  public searchValue = model<string>('');
+  public internalSearchValue = signal<string>('');
+
 
   private search$: Subject<void>;
   private destroy$: Subject<void>;
@@ -30,6 +32,12 @@ export class MealsSearchBarComponent implements OnDestroy {
     this.search$ = new Subject<void>();
     this.destroy$ = new Subject<void>();
     this.searchSubscription();
+  }
+
+  ngOnChanges(changes: SimpleChanges): void {
+    if (changes['searchValue']) {
+      this.internalSearchValue.set(this.searchValue());
+    }
   }
 
   ngOnDestroy(): void {
@@ -42,15 +50,15 @@ export class MealsSearchBarComponent implements OnDestroy {
   }
 
   public handleClear(): void {
-    this.searchValue.set('');
-    this.searchAction.emit(this.searchValue());
+    this.internalSearchValue.set('');
+    this.searchAction.emit(this.internalSearchValue());
   }
 
   private searchSubscription(): void {
     this.search$.pipe(
       takeUntil(this.destroy$),
       debounceTime(700),
-    ).subscribe(() => this.searchAction.emit(this.searchValue()));
+    ).subscribe(() => this.searchAction.emit(this.internalSearchValue()));
   }
 
 }

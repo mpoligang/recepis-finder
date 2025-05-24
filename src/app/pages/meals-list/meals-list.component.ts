@@ -57,6 +57,9 @@ export class MealsListComponent implements OnInit {
   }
 
   public handleSearch(search: string): void {
+    if (search !== "" && this.searchValue() === search) {
+      return;
+    }
     this.resetValues();
     this.searchValue.set(search);
     this.isLoading.set(true);
@@ -72,10 +75,9 @@ export class MealsListComponent implements OnInit {
   }
 
   public handleFilter(ingredient: string): void {
+    if (this.ingredientFilter() === ingredient) { return; }
     this.resetValues();
     this.ingredientFilter.set(ingredient);
-    console.log(this.ingredientFilter());
-
     this.isLoading.set(true);
     this.apiService
       .searchMealsByIngredient(ingredient)

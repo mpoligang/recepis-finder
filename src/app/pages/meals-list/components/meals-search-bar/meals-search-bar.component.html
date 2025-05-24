@@ -10,12 +10,12 @@
           class="w-full"
           id="search"
           name="search"
-          [(ngModel)]="searchValue"
+          [(ngModel)]="internalSearchValue"
           (input)="handleSearch()"
         />
         @if(isLoading()){
         <p-inputicon styleClass="pi pi-spinner pi-spin" />
-        } @if(searchValue().length > 0 && !isLoading()){
+        } @if(internalSearchValue().length > 0 && !isLoading()){
         <p-button
           (onClick)="handleClear()"
           size="small"

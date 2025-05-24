@@ -21,7 +21,7 @@
       ></p-select>
     </div>
   </div>
-
+  @if(!isLoading()){
   <div class="flex flex-wrap">
     @for (item of currentData(); track $index) {
     <div class="col-fixed">
@@ -33,6 +33,16 @@
     </div>
     }
   </div>
+  } @else {
+  <div class="flex flex-column">
+    @for (item of loadingSkeletonData(); track $index) {
+    <div class="flex-1 col">
+      <p-skeleton width="100%" height="40px" />
+    </div>
+    }
+  </div>
+  }
+
   <p-divider />
   <ng-template #footer>
     <p-button label="Cancel" [outlined]="true" (click)="visible.set(false)" />

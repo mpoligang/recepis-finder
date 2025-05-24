@@ -7,7 +7,7 @@
 <div class="meals-list-container-scroller">
   <div class="page-container px-3">
     <app-meals-search-bar
-      [(searchValue)]="searchValue"
+      [searchValue]="searchValue()"
       (searchAction)="handleSearch($event)"
       [isLoading]="isLoading()"
       [results]="mealList().result"
