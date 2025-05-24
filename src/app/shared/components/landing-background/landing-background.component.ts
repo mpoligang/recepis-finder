@@ -1,4 +1,4 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { Component } from '@angular/core';
 import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
@@ -7,34 +7,4 @@ import { SkeletonModule } from 'primeng/skeleton';
   templateUrl: './landing-background.component.html',
   styleUrl: './landing-background.component.scss'
 })
-export class LandingBackgroundComponent implements OnInit {
-
-  public imageLoaded = signal<boolean>(false);
-  public imgSrc = signal<string>('/food_background.jpg');
-
-
-  ngOnInit(): void {
-    this.handleLoadingImage();
-    setTimeout(() => {
-      const element = window.document.getElementById('landing');
-      if (element) {
-        console.log(element);
-
-        element.click();
-      }
-    }, 500)
-  }
-
-
-  private handleLoadingImage(): void {
-    const img = new Image();
-    img.src = this.imgSrc();
-    img.onload = () => {
-      this.imageLoaded.set(true);
-    };
-    img.onerror = () => {
-      this.imageLoaded.set(true);
-    };
-  }
-
-}
+export class LandingBackgroundComponent { }

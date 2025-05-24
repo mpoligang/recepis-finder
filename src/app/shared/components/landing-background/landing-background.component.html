@@ -1,15 +1,4 @@
-<div
-  id="landing-background"
-  class="landing-background"
-  [class]="{ visible: imageLoaded(), invisible: !imageLoaded() }"
-  [style.backgroundImage]="'url(' + imgSrc() + ')'"
-></div>
-
-<div
-  id="landing"
-  class="relative flex flex-column align-items-center justify-content-center h-full overflow-y-auto overflow-x-hidden"
->
-  @if(imageLoaded()) {
+<div class="landing-background">
   <div class="landing-content">
     <img
       src="./cook_hat.png"
@@ -17,14 +6,7 @@
       height="80"
       width="80"
     />
-    <h3 class="m-0 mt-3">Recipes Finder</h3>
+    <h3 class="m-0 mt-3">Receips Finder</h3>
     <ng-content />
   </div>
-  }
 </div>
-
-@if(!imageLoaded()) {
-<div class="flex-1">
-  <p-skeleton height="100dvh" width="100%"></p-skeleton>
-</div>
-}

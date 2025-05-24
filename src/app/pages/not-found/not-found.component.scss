@@ -4,4 +4,11 @@
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
+    max-width: 400px;
+}
+
+@media (max-width: 425px) {
+    .message {
+        max-width: 320px;
+    }
 }
