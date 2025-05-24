@@ -1,25 +1,26 @@
-@if(imageLoaded()){
 <div
-  class="landing-container"
-  [style]="{ 'background-image': 'url(' + imgSrc() + ')' }"
+  class="relative flex flex-column align-items-center justify-content-center h-full overflow-y-auto overflow-x-hidden"
 >
-  <div class="flex flex-column">
-    <div class="col">
-      <img
-        src="./cook_hat.png"
-        alt="Recipes Finder Logo"
-        height="80"
-        width="80"
-      />
-    </div>
-    <div class="col">
-      <h3 class="m-0">Receips Finder</h3>
-    </div>
+  @if(imageLoaded()){
+  <div
+    class="landing-container"
+    [style]="{ 'background-image': 'url(' + imgSrc() + ')' }"
+  ></div>
+  } @else{
+  <div class="flex-1">
+    <p-skeleton height="100dvh" width="100%"></p-skeleton>
+  </div>
+  } @if(imageLoaded()){
+
+  <div class="landing-content">
+    <img
+      src="./cook_hat.png"
+      alt="Recipes Finder Logo"
+      height="80"
+      width="80"
+    />
+    <h3 class="m-0 mt-3">Receips Finder</h3>
     <ng-content />
   </div>
+  }
 </div>
-} @else{
-<div class="flex-1">
-  <p-skeleton height="100dvh" width="100%"></p-skeleton>
-</div>
-}

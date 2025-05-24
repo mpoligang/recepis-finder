@@ -1,12 +1,11 @@
 .landing-container {
-    position: relative;
+    position: absolute;
     background-size: cover;
     background-position: center;
-    height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    height: 100dvh;
+    width: 100%;
+    top: 0;
+    z-index: 1;
     color: var(--p-surface-0);
 }
 
@@ -22,18 +21,16 @@
     pointer-events: none;
 }
 
-.landing-container > * {
+.landing-content {
     position: relative;
-    z-index: 3;
+    color: var(--p-surface-0);
     max-width: 768px;
     width: 100%;
+    margin: 0 auto;
+    z-index: 99;
     text-align: center;
     font-size: 1.5rem;
-}
-
-.landing-container img {
-    display: block;
-    height: 80px;
-    width: 80px;
-    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
