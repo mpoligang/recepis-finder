@@ -1,11 +1,9 @@
-@if(imageLoaded()) {
-<!-- Sfondo: fuori dal flusso -->
 <div
   id="landing-background"
   class="landing-background"
+  [class]="{ visible: imageLoaded(), invisible: !imageLoaded() }"
   [style.backgroundImage]="'url(' + imgSrc() + ')'"
 ></div>
-}
 
 <div
   id="landing"
