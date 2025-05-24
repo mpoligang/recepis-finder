@@ -15,7 +15,6 @@
     z-index: 0;
     display: flex;
     justify-content: center;
-    align-items: center;
 }
 
 .landing-overlay {
@@ -37,6 +36,6 @@
     font-size: 1.5rem;
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
+    overflow-y: auto;
 }
