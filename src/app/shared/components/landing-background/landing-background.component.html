@@ -2,15 +2,6 @@
   class="relative flex flex-column align-items-center justify-content-center h-full overflow-y-auto overflow-x-hidden"
 >
   @if(imageLoaded()){
-  <div
-    class="landing-container"
-    [style]="{ 'background-image': 'url(' + imgSrc() + ')' }"
-  ></div>
-  } @else{
-  <div class="flex-1">
-    <p-skeleton height="100dvh" width="100%"></p-skeleton>
-  </div>
-  } @if(imageLoaded()){
 
   <div class="landing-content">
     <img
@@ -24,3 +15,14 @@
   </div>
   }
 </div>
+
+@if(imageLoaded()){
+<div
+  class="landing-container"
+  [style]="{ 'background-image': 'url(' + imgSrc() + ')' }"
+></div>
+} @else{
+<div class="flex-1">
+  <p-skeleton height="100dvh" width="100%"></p-skeleton>
+</div>
+}
