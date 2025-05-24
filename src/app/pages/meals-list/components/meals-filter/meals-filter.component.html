@@ -7,21 +7,21 @@
   [draggable]="false"
   [resizable]="false"
 >
-  <div class="flex">
+  <div class="flex flex-wrap align-items-center">
     <div class="col">
-      <h3 class="m-0">Ingredients</h3>
+      <h3 class="m-0">Ingredients ({{ this.totalRecords() }})</h3>
+    </div>
+    <div class="col-fixed">
+      <p-select
+        [placeholder]="'Select page'"
+        name="page"
+        [options]="this.totalPages()"
+        [(ngModel)]="currentPage"
+        (ngModelChange)="onPageChange()"
+      ></p-select>
     </div>
   </div>
-  <div class="flex">
-    <div class="col py-0">
-      <p-paginator
-        (onPageChange)="onPageChange($event)"
-        [first]="1"
-        [rows]="30"
-        [totalRecords]="totalRecords()"
-      />
-    </div>
-  </div>
+
   <div class="flex flex-wrap">
     @for (item of currentData(); track $index) {
     <div class="col-fixed">
@@ -33,6 +33,7 @@
     </div>
     }
   </div>
+  <p-divider />
   <ng-template #footer>
     <p-button label="Cancel" [outlined]="true" (click)="visible.set(false)" />
     <p-button label="Save" (click)="save()" [disabled]="!selected()" />
