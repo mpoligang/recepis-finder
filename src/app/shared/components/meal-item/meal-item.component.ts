@@ -43,6 +43,7 @@ export class MealItemComponent implements OnChanges {
     };
     img.onerror = () => {
       this.imageOnError.set(true);
+      this.imageLoaded.set(true);
     };
   }
 
