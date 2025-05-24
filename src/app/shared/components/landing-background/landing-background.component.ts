@@ -16,8 +16,10 @@ export class LandingBackgroundComponent implements OnInit {
   ngOnInit(): void {
     this.handleLoadingImage();
     setTimeout(() => {
-      const element = window.document.getElementById('landing-background');
+      const element = window.document.getElementById('landing');
       if (element) {
+        console.log(element);
+
         element.click();
       }
     }, 500)
