@@ -2,7 +2,7 @@
 
 ## 1. Introduction
 
-**Recipes Finder** is a modern web application for discovering recipes, designed to offer a simple and fast user experience. Users can search for dishes by ingredients, name, or category and get accurate results in seconds. The user interface is inspired by the popular **Just Eat** app, featuring a clean, accessible, and responsive design.
+**Recipes Finder** is a modern web application for discovering recipes, designed to offer a simple and fast user experience. Users can search for dishes by ingredients or keyword and get accurate results in seconds. The user interface is inspired by the popular **Just Eat** app, featuring a clean, accessible, and responsive design.
 
 ---
 
@@ -50,19 +50,33 @@ The user interface is **inspired by the Just Eat app**, focusing on:
 - **Node.js** `v18.x` or higher (`v22.14.0` recommended)
 - **npm** (Node Package Manager)
 
-### Installation
+### Clone the repository
 
 ```bash
-# Clone the repository
 git clone https://github.com/mpoligang/recepis-finder.git
 cd recepis-finder
+```
 
-# Install dependencies
+### Install dependencies
+
+```bash
 npm install
+```
 
-# Run the app in development mode
+### Run the app in development mode
+
+```bash
 npm start
+```
 
-# Build the app for production
+### Open app in browser
+
+```bash
+http://localhost:4200
+```
+
+### Build the app for production
+
+```bash
 npm run build
 ```
