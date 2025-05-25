@@ -20,3 +20,12 @@ app-root {
     max-width: 768px;
     margin: 0 auto;
 }
+
+@keyframes appear {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}

@@ -73,14 +73,14 @@ export class MapStructService {
       const ingredient = (data)[`strIngredient${index}` as keyof MealDto];
       const measure = (data)[`strMeasure${index}` as keyof MealDto];
       if (ingredient && ingredient.trim() !== '') {
-        const pippo = ingredient.replace(' ', '%20')
+        const formattedStringImage = ingredient.replace(' ', '%20')
         ingredients.push({
           ingredient: ingredient.trim(),
           measure: measure?.trim() || '',
           thumbs: {
-            small: `${environment.imageApi}/ingredients/${pippo}-small.png`,
-            medium: `${environment.imageApi}/ingredients/${pippo}.png`,
-            large: `${environment.imageApi}/ingredients/${pippo}-large.png`,
+            small: `${environment.imageApi}/ingredients/${formattedStringImage}-small.png`,
+            medium: `${environment.imageApi}/ingredients/${formattedStringImage}.png`,
+            large: `${environment.imageApi}/ingredients/${formattedStringImage}-large.png`,
           }
         });
       }
@@ -131,16 +131,22 @@ export class MapStructService {
   }
 
   public extractPreparationsStep(instructions: string): Preparation[] {
-    const steps = instructions.split(/\r?\n/).filter(line => line.trim() !== '');
-    let stepsArray: Preparation[] = [];
-    stepsArray = steps.filter(item => item.length > 8).map((instructions, index) => {
-      return {
-        step: index + 1,
-        instructions
-      }
-    });
+    const cleaned = instructions.replace(/\.?STEP\s*\d+/gi, '');
+    const lines = cleaned.split(/\r?\n/);
+
+    const filtered = lines
+      .map(line => line.trim())
+      .filter(line => line.replace(/\s/g, '').length >= 10);
+
+    const stepsArray: Preparation[] = filtered.map((instructions, index) => ({
+      step: index + 1,
+      instructions
+    }));
+
     return stepsArray;
   }
+
+
 
 
 

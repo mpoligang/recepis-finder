@@ -2,7 +2,12 @@
   <div class="col-fixed">
     <div class="ingredient-image-container">
       @if(imageLoaded()){
-      <img [src]="item().thumbs.small" [height]="55" [width]="55" />
+      <img
+        class="ingredient-img"
+        [src]="item().thumbs.small"
+        [height]="55"
+        [width]="55"
+      />
       } @else {
       <i class="pi pi-spin pi-spinner"></i>
       }

@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Meal, MealBasicData } from '../../models/Meal.interface';
-
 @Injectable({
   providedIn: 'root'
 })
 export class FavoriteService {
-
 
   public getFavorites(): Array<MealBasicData> {
     let result = [];
@@ -51,5 +49,7 @@ export class FavoriteService {
     const index = favorites.findIndex(item => item.id === mealId);
     return index !== -1 && favorites[index].favorite;
   }
+
+
 
 }

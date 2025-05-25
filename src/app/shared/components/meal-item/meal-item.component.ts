@@ -1,4 +1,5 @@
-import { Component, input, OnChanges, output, signal, SimpleChanges } from '@angular/core';
+import { ImageLoaderService } from './../../services/image-loader/image-loader.service';
+import { Component, inject, input, OnChanges, output, signal, SimpleChanges } from '@angular/core';
 import { ButtonModule } from 'primeng/button';
 import { TagModule } from 'primeng/tag';
 
@@ -19,13 +20,14 @@ export class MealItemComponent implements OnChanges {
   public setFavorite = output<void>();
   public clickItem = output<void>();
 
-  public imageLoaded = signal(false);
-  public imageOnError = signal(false);
+  public imageLoaded = signal<boolean>(false);
+  public imageOnError = signal<boolean>(false);
+
+  private readonly imageLoaderService = inject(ImageLoaderService);
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['image'] && changes['image'].currentValue !== changes['image'].previousValue) {
-      this.resetValues();
-      this.handleLoadingImage();
+      this.imageLoaderService.handleLoadingImage(this.image(), this.imageLoaded, this.imageOnError);
     }
   }
 
@@ -34,23 +36,7 @@ export class MealItemComponent implements OnChanges {
     this.setFavorite.emit();
   }
 
-  private handleLoadingImage(): void {
-    const img = new Image();
-    img.src = this.image();
-    img.onload = () => {
-      this.imageOnError.set(false);
-      this.imageLoaded.set(true);
-    };
-    img.onerror = () => {
-      this.imageOnError.set(true);
-      this.imageLoaded.set(true);
-    };
-  }
 
-  private resetValues(): void {
-    this.imageOnError.set(false);
-    this.imageLoaded.set(false);
-  }
 
 
 

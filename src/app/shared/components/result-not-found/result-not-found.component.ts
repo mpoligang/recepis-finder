@@ -1,4 +1,5 @@
-import { Component, OnInit, signal } from '@angular/core';
+import { ImageLoaderService } from './../../services/image-loader/image-loader.service';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { SkeletonModule } from 'primeng/skeleton';
 
 @Component({
@@ -8,23 +9,15 @@ import { SkeletonModule } from 'primeng/skeleton';
   styleUrl: './result-not-found.component.scss'
 })
 export class ResultNotFoundComponent implements OnInit {
+
   public imageLoaded = signal<boolean>(false);
   public imgSrc = signal<string>('./noresult.gif');
 
+  private readonly imageLoaderService = inject(ImageLoaderService);
 
   ngOnInit(): void {
-    this.handleLoadingImage();
+    this.imageLoaderService.handleLoadingImage(this.imgSrc(), this.imageLoaded);
   }
 
 
-  private handleLoadingImage(): void {
-    const img = new Image();
-    img.src = this.imgSrc();
-    img.onload = () => {
-      this.imageLoaded.set(true);
-    };
-    img.onerror = () => {
-      this.imageLoaded.set(true);
-    };
-  }
 }

@@ -19,6 +19,10 @@
         }
     }
 
+    .ingredient-img {
+        animation: appear 0.5s ease-in-out;
+    }
+
     .ingredient-title,
     .ingredient-measure {
         display: -webkit-box;

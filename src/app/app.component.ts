@@ -1,9 +1,8 @@
 import { Component } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { RouterOutlet } from '@angular/router';
 import { MessageService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
-
-import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-root',

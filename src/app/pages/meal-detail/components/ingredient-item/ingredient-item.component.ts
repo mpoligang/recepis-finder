@@ -1,4 +1,5 @@
-import { Component, input, signal, SimpleChanges } from '@angular/core';
+import { ImageLoaderService } from './../../../../shared/services/image-loader/image-loader.service';
+import { Component, inject, input, signal, SimpleChanges } from '@angular/core';
 import { Ingredient, IngredientInstance } from '../../../../shared/models/Ingredients.interface';
 
 @Component({
@@ -11,33 +12,17 @@ export class IngredientItemComponent {
 
   public item = input<Ingredient>(new IngredientInstance());
 
-  public imageLoaded = signal(false);
-  public imageOnError = signal(false);
+  public imageLoaded = signal<boolean>(false);
+  public imageOnError = signal<boolean>(false);
 
+  private readonly imageLoaderService = inject(ImageLoaderService);
 
   ngOnChanges(changes: SimpleChanges) {
     if (changes['item'] && changes['item'].currentValue !== changes['item'].previousValue) {
-      this.resetValues();
-      this.handleLoadingImage();
+      this.imageLoaderService.handleLoadingImage(this.item().thumbs.small, this.imageLoaded, this.imageOnError);
     }
   }
 
-  private handleLoadingImage(): void {
-    const img = new Image();
-    img.src = this.item().thumbs.small;
-    img.onload = () => {
-      this.imageOnError.set(false);
-      this.imageLoaded.set(true);
-    };
-    img.onerror = () => {
-      this.imageOnError.set(true);
-    };
-  }
-
-  private resetValues(): void {
-    this.imageOnError.set(false);
-    this.imageLoaded.set(false);
-  }
 
 
 }
