@@ -1,3 +1,4 @@
+@if(imageLoaded()){
 <div class="landing-wrapper">
   <div class="landing-background">
     <div class="landing-overlay"></div>
@@ -13,3 +14,8 @@
     </div>
   </div>
 </div>
+} @else {
+<div class="h-full w-full">
+  <p-skeleton height="100%" width="100%" />
+</div>
+}
