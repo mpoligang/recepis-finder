@@ -33,7 +33,7 @@ export class ApiService {
   public getMealById(id: string): Observable<Meal | null> {
     let params = new HttpParams().append('i', id);
     return this.http.get<GenericResponseDto<MealDto>>(`${environment.api}/${ApiEndpoints.LOOKUP}`, { params })
-      .pipe(map((data: GenericResponseDto<MealDto>) => this.mapStructService.mapMealsCompleteResponse(data)));
+      .pipe(map((data: GenericResponseDto<MealDto>) => this.mapStructService.mapMealCompleteResponse(data)));
   }
 
   public getIngredients(): Observable<GenericResponseDto<IngredientDto>> {

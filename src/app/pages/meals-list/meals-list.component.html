@@ -1,6 +1,6 @@
 <div class="page-container px-3 pt-3 pb-1">
   <app-title-with-back-navigation
-    title="Search Receips"
+    title="Search Recipes"
     (backNavigation)="handleBackToLanding()"
   />
 </div>
@@ -10,7 +10,7 @@
       [searchValue]="searchValue()"
       (searchAction)="handleSearch($event)"
       [isLoading]="isLoading()"
-      [results]="mealList().result"
+      [results]="mealList().results"
     >
       <div class="col-fixed px-0">
         <p-button
@@ -50,7 +50,7 @@
       </div>
       }
     </div>
-    @if(!mealList().result && !isLoading()){
+    @if(!mealList().results && !isLoading()){
     <div class="mt-3">
       <app-result-not-found />
     </div>

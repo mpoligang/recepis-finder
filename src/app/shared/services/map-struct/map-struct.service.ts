@@ -25,12 +25,12 @@ export class MapStructService {
         thumbs: this.extractThumbSizes(item.strMealThumb),
         favorite: this.favoriteService.checkIfIsFavorite(item.idMeal)
       })),
-      result: data.meals.length
+      results: data.meals.length
     }
   }
 
-  public mapMealsCompleteResponse(data: GenericResponseDto<MealDto>): Meal | null {
-    if (!data || !Array.isArray(data.meals)) { return null; }
+  public mapMealCompleteResponse(data: GenericResponseDto<MealDto>): Meal | null {
+    if (!data || !Array.isArray(data.meals) || data.meals.length === 0) { return null; }
     const meal = data.meals[0];
     return {
       ...this.mapMealsResponse(meal)
