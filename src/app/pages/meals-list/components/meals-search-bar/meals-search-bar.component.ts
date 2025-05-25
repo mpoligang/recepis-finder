@@ -25,8 +25,8 @@ export class MealsSearchBarComponent implements OnChanges, OnDestroy {
   public internalSearchValue = signal<string>('');
 
 
-  private search$: Subject<void>;
-  private destroy$: Subject<void>;
+  private readonly search$: Subject<void>;
+  private readonly destroy$: Subject<void>;
 
   constructor() {
     this.search$ = new Subject<void>();

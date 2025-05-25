@@ -12,7 +12,7 @@ import { LandingBackgroundComponent } from '../../shared/components/landing-back
 })
 export class LandingComponent {
 
-  private router = inject(Router);
+  private readonly router = inject(Router);
 
 
   public goToSearchReceips(): void {

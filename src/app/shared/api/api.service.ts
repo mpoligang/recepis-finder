@@ -15,8 +15,8 @@ import { Meal } from '../models/Meal.interface';
 })
 export class ApiService {
 
-  private http = inject(HttpClient);
-  private mapStructService = inject(MapStructService);
+  private readonly http = inject(HttpClient);
+  private readonly mapStructService = inject(MapStructService);
 
   public searchMeals(term?: string): Observable<MealBasicList> {
     let params = new HttpParams().append('s', term ?? '');
